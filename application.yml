@@ -5,10 +5,10 @@ spring:
 ---
 spring:
   profiles: dev     #开发环境
-    application:
-      name: microservicecloud-config-wqh-dev	  
+  application: 
+    name: microservicecloud-config-wqh-dev    
 ---
 spring:
   profiles: test   #测试环境
-    application:
-      name: microservicecloud-config-wqh-test
+  application: 
+    name: microservicecloud-config-wqh-test

@@ -1,15 +1,18 @@
-﻿server:
+﻿spring:
+  profiles:
+    active: dev
+----
+server:
   port: 8001
-  
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   type-aliases-package: com.wqh.cloud.entity
   mapper-locations:
   - classpath:mybatis/mapper/*.xml
-
 spring:
+  profiles: dev
   application:
-    name: microservicecloud-dept        #微服务名称
+    name: microservicecloud-config-dept-client     #微服务名称
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
@@ -21,18 +24,48 @@ spring:
       initial-size: 5
       max-total: 5
       max-wait-millis: 200
-
-
 eureka:
   client:           #客户端注册进eureka服务列表内
     service-url:
-#      defaultZone: http://localhost:7001/eureka/  #单机版本
-      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+      defaultZone: http://eureka7001.com:7001/eureka/
   instance:
-    instance-id: microservicecloud-dept8001     #主机名称:修改服务名称
+    instance-id: dept-8001.com     #主机名称:修改服务名称
     prefer-ip-address: true # 访问路径可以显式IP地址
-    
-    
+info:
+  app.name: wqh-microservicecloud
+  company.name: www.wqh.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+---
+server:
+  port: 8002
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  type-aliases-package: com.wqh.cloud.entity
+  mapper-locations:
+  - classpath:mybatis/mapper/*.xml
+spring:
+  profiles: test
+  application:
+    name: microservicecloud-config-dept-client  #微服务名称
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cloudDB02
+    username: root
+    password: root
+    dbcp2:
+      min-idle: 5
+      initial-size: 5
+      max-total: 5
+      max-wait-millis: 200
+eureka:
+  client:           #客户端注册进eureka服务列表内
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/
+  instance:
+    instance-id: dept-8002.com     #主机名称:修改服务名称
+    prefer-ip-address: true # 访问路径可以显式IP地址
 info:
   app.name: wqh-microservicecloud
   company.name: www.wqh.com
